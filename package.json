@@ -1,6 +1,6 @@
 {
     "name": "quikify",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "Quikify: Swift and seamless API management for React Native. Accelerate your app's data flow with speed and simplicity. Quikify - because every millisecond counts.",
     "main": "index.js",
     "scripts": {
