@@ -1,6 +1,7 @@
 
 # Quikify
-![Quikify Logo](logo.png)
+<img src="logo.png" alt="Quikify Logo" width="100">
+
 
 Quikify is a lightweight and high-performance API management toolkit designed for React Native applications. It simplifies HTTP requests using Axios, providing a seamless and efficient way to handle data fetching in your projects.
 
