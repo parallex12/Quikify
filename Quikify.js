@@ -1,7 +1,7 @@
 // ApiEndpoints.js
 import ApiHandlers from "./ApiHandlers";
 
-export const ApiEndpoints = {
+export const Quikify = {
   create: (path, data, type) => {
     return ApiHandlers.runApi({ path, data, type, method: 'create' });
   },

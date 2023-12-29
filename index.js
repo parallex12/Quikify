@@ -1,3 +1,3 @@
 // index.js
 export * from './ApiHandlers';
-export * from './ApiEndpoints';
+export * from './Quikify';
