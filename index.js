@@ -1,3 +1,4 @@
+import { Quikify } from "./Quikify";
+
 // index.js
-export * from './ApiHandlers';
-export * from './Quikify';
+export default Quikify
