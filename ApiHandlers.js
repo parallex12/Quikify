@@ -1,11 +1,10 @@
 // ApiHandlers.js
-import axios from "axios";
+import axios from 'axios';
+import React, { useState } from 'react';
 
 class ApiHandlers {
   constructor() {
     this.globalDispatch = null;
-
-    // Map API types to corresponding functions
     this.apiHandlers = {
       get: this._run_get,
       create: this._run_create,
@@ -19,47 +18,59 @@ class ApiHandlers {
   }
 
   async _run_get(props) {
-    try {
-      const response = await axios.get(props?.path);
-      this.dispatchAction(props?.type, response.data);
-      return response.data;
-    } catch (error) {
-      console.error("GET error:", error);
-      throw error;
-    }
+    return new Promise((resolve, reject) => {
+      axios.get(props?.path)
+        .then(response => {
+          this.dispatchAction(props?.type, response.data);
+          resolve(response.data);
+        })
+        .catch(error => {
+          console.error('GET error:', error);
+          reject(error);
+        });
+    });
   }
 
   async _run_create(props) {
-    try {
-      const response = await axios.post(props?.path, props?.data);
-      this.dispatchAction(props?.type, response.data);
-      return response.data;
-    } catch (error) {
-      console.error("CREATE error:", error);
-      throw error;
-    }
+    return new Promise((resolve, reject) => {
+      axios.post(props?.path, props?.data)
+        .then(response => {
+          this.dispatchAction(props?.type, response.data);
+          resolve(response.data);
+        })
+        .catch(error => {
+          console.error('CREATE error:', error);
+          reject(error);
+        });
+    });
   }
 
   async _run_update(props) {
-    try {
-      const response = await axios.put(props?.path, props?.data);
-      this.dispatchAction(props?.type, response.data);
-      return response.data;
-    } catch (error) {
-      console.error("UPDATE error:", error);
-      throw error;
-    }
+    return new Promise((resolve, reject) => {
+      axios.put(props?.path, props?.data)
+        .then(response => {
+          this.dispatchAction(props?.type, response.data);
+          resolve(response.data);
+        })
+        .catch(error => {
+          console.error('UPDATE error:', error);
+          reject(error);
+        });
+    });
   }
 
   async _run_delete(props) {
-    try {
-      const response = await axios.delete(props?.path);
-      this.dispatchAction(props?.type, response.data);
-      return response.data;
-    } catch (error) {
-      console.error("DELETE error:", error);
-      throw error;
-    }
+    return new Promise((resolve, reject) => {
+      axios.delete(props?.path)
+        .then(response => {
+          this.dispatchAction(props?.type, response.data);
+          resolve(response.data);
+        })
+        .catch(error => {
+          console.error('DELETE error:', error);
+          reject(error);
+        });
+    });
   }
 
   dispatchAction(type, payload) {
@@ -72,10 +83,8 @@ class ApiHandlers {
   }
 
   async runApi(props) {
-    const { type } = props;
-
-    // Use the corresponding function based on the API type
-    const apiHandler = this.apiHandlers[type];
+    const { method } = props;
+    const apiHandler = this.apiHandlers[method];
 
     if (apiHandler) {
       try {
@@ -85,9 +94,18 @@ class ApiHandlers {
         throw error;
       }
     } else {
-      throw new Error(`Unsupported API type: ${type}`);
+      throw new Error(`Unsupported API method: ${method}`);
     }
   }
 }
 
-export default new ApiHandlers();
+const ApiHandlersInstance = new ApiHandlers();
+const ApiHandlersComponent = () => {
+  const [globalDispatch, setGlobalDispatch] = useState(null);
+  ApiHandlersInstance.setGlobalDispatch(setGlobalDispatch);
+
+  return null;  // or whatever JSX you need
+};
+
+export { ApiHandlersComponent, ApiHandlersInstance };
+  

@@ -1,17 +1,20 @@
 // ApiEndpoints.js
-import ApiHandlers from "./ApiHandlers";
+import { ApiHandlersComponent, ApiHandlersInstance } from './ApiHandlers';
 
-export const Quikify = {
+const Quikify = {
   create: (path, data, type) => {
-    return ApiHandlers.runApi({ path, data, type, method: 'create' });
+    return ApiHandlersInstance.runApi({ path, data, type, method: 'create' });
   },
   get: (path, type) => {
-    return ApiHandlers.runApi({ path, type, method: 'get' });
+    return ApiHandlersInstance.runApi({ path, type, method: 'get' });
   },
   update: (path, data, type) => {
-    return ApiHandlers.runApi({ path, data, type, method: 'update' });
+    return ApiHandlersInstance.runApi({ path, data, type, method: 'update' });
   },
   delete: (path, type) => {
-    return ApiHandlers.runApi({ path, type, method: 'delete' });
+    return ApiHandlersInstance.runApi({ path, type, method: 'delete' });
   },
+  setGlobalDispatch: (dispatch) => ApiHandlersInstance.setGlobalDispatch(dispatch),
 };
+
+export { Quikify, ApiHandlersComponent };
