@@ -29,7 +29,6 @@ class ApiHandlers {
 
   async _run_get(props) {
     return new Promise((resolve, reject) => {
-      console.log("axios",axios.defaults.baseURL)
       axios.get(props?.path)
         .then(response => {
           this.dispatchAction(props?.type, response.data);
@@ -43,7 +42,9 @@ class ApiHandlers {
 
   async _run_create(props) {
     return new Promise((resolve, reject) => {
-      axios.post(props?.path, props?.data)
+      let data = props?.data
+      data["config"] = props?.config
+      axios.post(props?.path, data)
         .then(response => {
           this.dispatchAction(props?.type, response.data);
           resolve(response.data);
@@ -57,7 +58,9 @@ class ApiHandlers {
 
   async _run_update(props) {
     return new Promise((resolve, reject) => {
-      axios.put(props?.path, props?.data)
+      let data = props?.data
+      data["config"] = props?.config
+      axios.put(props?.path, data)
         .then(response => {
           this.dispatchAction(props?.type, response.data);
           resolve(response.data);
@@ -71,7 +74,7 @@ class ApiHandlers {
 
   async _run_delete(props) {
     return new Promise((resolve, reject) => {
-      axios.delete(props?.path)
+      axios.delete(props?.path, { data: { config: props?.config } })
         .then(response => {
           this.dispatchAction(props?.type, response.data);
           resolve(response.data);
