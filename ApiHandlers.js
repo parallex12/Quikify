@@ -1,4 +1,3 @@
-// ApiHandlers.js
 import axios from 'axios';
 import React, { useState } from 'react';
 
@@ -17,15 +16,26 @@ class ApiHandlers {
     this.globalDispatch = dispatch;
   }
 
+  configure({ baseURL }) {
+    // Set the base URL globally for Axios
+    axios.defaults.baseURL = baseURL;
+  }
+
+  checkBaseURL() {
+    if (!axios.defaults.baseURL) {
+      console.warn('Base URL not configured. Use Quikify.configure({ baseURL }) before making API requests.');
+    }
+  }
+
   async _run_get(props) {
     return new Promise((resolve, reject) => {
+      console.log("axios",axios.defaults.baseURL)
       axios.get(props?.path)
         .then(response => {
           this.dispatchAction(props?.type, response.data);
           resolve(response.data);
         })
         .catch(error => {
-          console.error('GET error:', error);
           reject(error);
         });
     });
@@ -83,6 +93,7 @@ class ApiHandlers {
   }
 
   async runApi(props) {
+    this.checkBaseURL();
     const { method } = props;
     const apiHandler = this.apiHandlers[method];
 
@@ -108,4 +119,3 @@ const ApiHandlersComponent = () => {
 };
 
 export { ApiHandlersComponent, ApiHandlersInstance };
-  
