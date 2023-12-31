@@ -15,6 +15,7 @@ const Quikify = {
     return ApiHandlersInstance.runApi({ path, type, method: 'delete' });
   },
   setGlobalDispatch: (dispatch) => ApiHandlersInstance.setGlobalDispatch(dispatch),
+  configure: (obj) => ApiHandlersInstance.configure(obj),
 };
 
 export { Quikify, ApiHandlersComponent };
