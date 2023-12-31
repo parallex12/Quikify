@@ -8,8 +8,8 @@ const Quikify = {
     }
     return ApiHandlersInstance.runApi({ path, data, config, type, method: 'create' });
   },
-  get: (path, type, config) => {
-    return ApiHandlersInstance.runApi({ path, config, type, method: 'get' });
+  get: (path, type) => {
+    return ApiHandlersInstance.runApi({ path, type, method: 'get' });
   },
   update: (path, data, type, config) => {
     if (typeof (data) != "object") {
