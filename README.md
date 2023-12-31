@@ -52,11 +52,11 @@ const App = () => {
 - Axios Under the Hood: Utilizes Axios for robust and reliable HTTP requests.
 - Global Dispatch: Set it once and forget it – Quikify seamlessly integrates with your Redux store.
 
-# Quikify API Reference
+## Quikify API Reference
 
 Quikify provides a set of methods for managing API requests in your React Native application. Below is the reference for the available methods:
 
-# `Quikify.get(path, type)`
+## `Quikify.get(path, type)`
 
 ### Parameters
 
@@ -79,7 +79,7 @@ Quikify.get("https://api.example.com/data", "REDUX_STATE")
   });
 ```
 
-# `Quikify.post(path, data, type,config)`
+## `Quikify.post(path, data, type,config)`
 
 ### Parameters
 
@@ -97,7 +97,7 @@ A Promise that resolves to the response data from the API.
 
 ```javascript
 const postData = { key: "value" };
-Quikify.post("https://api.example.com/create", postData, "POST_SUCCESS", {
+Quikify.post("https://api.example.com/create", postData, "REDUX_STATE", {
   return: "table",
 })
   .then((response) => {
@@ -108,7 +108,7 @@ Quikify.post("https://api.example.com/create", postData, "POST_SUCCESS", {
   });
 ```
 
-# `Quikify.put(path, data, type,config)`
+## `Quikify.put(path, data, type,config)`
 
 ### Parameters
 
@@ -126,7 +126,7 @@ A Promise that resolves to the response data from the API.
 
 ```javascript
   const postData = { key: "value" };
-  Quikify.put("https://api.example.com/create", postData, "POST_SUCCESS", {
+  Quikify.put("https://api.example.com/create", postData, "REDUX_STATE", {
     return: "current",
   })
   .then((response) => {
@@ -137,7 +137,7 @@ A Promise that resolves to the response data from the API.
   });
 ```
 
-# `Quikify.delete(path, type,config)`
+## `Quikify.delete(path, type,config)`
 
 ### Parameters
 
@@ -152,7 +152,7 @@ A Promise that resolves to the response data from the API.
 ### Example
 
 ```javascript
-Quikify.delete("https://api.example.com/delete", "DELETE_SUCCESS", {
+Quikify.delete("https://api.example.com/delete", "REDUX_STATE", {
     return: "table",
   })
   .then((response) => {
