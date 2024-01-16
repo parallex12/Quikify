@@ -22,6 +22,7 @@ const Quikify = {
   },
   setGlobalDispatch: (dispatch) => ApiHandlersInstance.setGlobalDispatch(dispatch),
   configure: (obj) => ApiHandlersInstance.configure(obj),
+  setToken: (token) => ApiHandlersInstance.setToken(token),
 };
 
 export { Quikify, ApiHandlersComponent };

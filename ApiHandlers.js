@@ -21,6 +21,11 @@ class ApiHandlers {
     axios.defaults.baseURL = baseURL;
   }
 
+  setToken(token) {
+    // Set the base URL globally for Axios
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+
   checkBaseURL() {
     if (!axios.defaults.baseURL) {
       console.warn('Base URL not configured. Use Quikify.configure({ baseURL }) before making API requests.');

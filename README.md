@@ -31,7 +31,7 @@ const store = createStore(
   initialState,
   compose(applyMiddleware(...middleware))
 );
-Quikify.setGlobalDispatch(store.dispatch);
+Quikify.setGlobalDispatch(store.dispatch); // add this line
 export default store;
 ```
 
@@ -70,7 +70,11 @@ A Promise that resolves to the response data from the API.
 ### Example
 
 ```javascript
-Quikify.get("https://api.example.com/data", "REDUX_STATE")
+
+//to use Users endpoint kindly connect firebase auth token to axios header.
+
+// Get Single Document by id
+Quikify.get("table/eUQJpfG9bGdI3W54Jd", GET_ERRORS)
   .then((response) => {
     console.log("GET Response:", response);
   })
@@ -88,7 +92,6 @@ Quikify.get("https://api.example.com/data", "REDUX_STATE")
 - `type` (string): The Redux action type to dispatch upon a successful API call.
 - `config` (object) (optional): {return : "table","current"} it returns updated data as current or complete table
 
-
 ### Returns
 
 A Promise that resolves to the response data from the API.
@@ -97,14 +100,24 @@ A Promise that resolves to the response data from the API.
 
 ```javascript
 const postData = { key: "value" };
-Quikify.post("https://api.example.com/create", postData, "REDUX_STATE", {
+// Create Document with auto id
+Quikify.create("table", { body }, "REDUX_STATE", { return: "table" })
+  .then((response) => {
+    console.log("Response:", response);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+// Create Document with custom id
+Quikify.create("table/cutomsID", { body }, "REDUX_STATE", {
   return: "table",
 })
   .then((response) => {
-    console.log("POST Response:", response);
+    console.log("Response:", response);
   })
   .catch((error) => {
-    console.error("POST Error:", error);
+    console.error("Error:", error);
   });
 ```
 
@@ -117,7 +130,6 @@ Quikify.post("https://api.example.com/create", postData, "REDUX_STATE", {
 - `type` (string): The Redux action type to dispatch upon a successful API call.
 - `config` (object) (optional): {return : "table","current"} it returns updated data as current or complete table
 
-
 ### Returns
 
 A Promise that resolves to the response data from the API.
@@ -125,15 +137,14 @@ A Promise that resolves to the response data from the API.
 ### Example
 
 ```javascript
-  const postData = { key: "value" };
-  Quikify.put("https://api.example.com/create", postData, "REDUX_STATE", {
-    return: "current",
-  })
+const postData = { key: "value" };
+// Update Document by id
+Quikify.update("table/eUQJpfG9bGdI3W54Jd", { body }, "REDUX_STATE")
   .then((response) => {
-    console.log("POST Response:", response);
+    console.log("GET Response:", response);
   })
   .catch((error) => {
-    console.error("POST Error:", error);
+    console.error("GET Error:", error);
   });
 ```
 
@@ -152,14 +163,14 @@ A Promise that resolves to the response data from the API.
 ### Example
 
 ```javascript
-Quikify.delete("https://api.example.com/delete", "REDUX_STATE", {
-    return: "table",
-  })
+// Delete Document by id
+
+Quikify.delete("table/12", "REDUX_STATE")
   .then((response) => {
-    console.log("DELETE Response:", response);
+    console.log("GET Response:", response);
   })
   .catch((error) => {
-    console.error("DELETE Error:", error);
+    console.error("GET Error:", error);
   });
 ```
 
